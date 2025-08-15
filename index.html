@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nidzid Agency | وكالة التسويق بالمؤثرين</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Tajawal -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Swiper.js for the Services and Testimonials Slider -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <!-- Chart.js for the graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        /* General Styles for Arabic font and smooth scrolling */
+        body {
+            font-family: 'Tajawal', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Colors defined for Tailwind */
+        :root {
+            --primary-blue: #1A3C8B;
+            --secondary-red: #E20613;
+            --accent-yellow: #FFC900;
+        }
+
+        .bg-primary-blue { background-color: var(--primary-blue); }
+        .text-primary-blue { color: var(--primary-blue); }
+        .bg-secondary-red { background-color: var(--secondary-red); }
+        .bg-accent-yellow { background-color: var(--accent-yellow); }
+        .text-accent-yellow { color: var(--accent-yellow); }
+
+        /* Fade-in Animation on Scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Swiper.js Custom Styling */
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+        .swiper-pagination-bullet-active {
+            background-color: var(--primary-blue);
+        }
+        .swiper-button-next, .swiper-button-prev {
+            color: var(--primary-blue) !important;
+        }
+
+        /* Chart.js Container Styling */
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+
+        /* Responsive Navbar adjustments for mobile */
+        @media (max-width: 768px) {
+            .nav-link {
+                text-align: center;
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+
+    <!-- Header & Navigation Bar -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo - شعار الوكالة -->
+            <a href="#" class="flex items-center space-x-2 space-x-reverse font-bold text-2xl text-primary-blue">
+                <!-- Placeholder for the logo - يمكنك استبدال هذا برمز أو صورة حقيقية -->
+                <span class="text-secondary-red">
+                    <i class="fas fa-bullhorn"></i>
+                </span>
+                <span class="text-primary-blue">Nidzid Agency</span>
+            </a>
+
+            <!-- Desktop Menu - قائمة سطح المكتب -->
+            <nav class="hidden md:flex space-x-6 space-x-reverse">
+                <a href="#hero" class="text-gray-600 hover:text-primary-blue transition-colors font-medium">الرئيسية</a>
+                <a href="#about" class="text-gray-600 hover:text-primary-blue transition-colors font-medium">من نحن</a>
+                <a href="#story" class="text-gray-600 hover:text-primary-blue transition-colors font-medium">قصتنا</a>
+                <a href="#services" class="text-gray-600 hover:text-primary-blue transition-colors font-medium">خدماتنا</a>
+                <a href="#portfolio" class="text-gray-600 hover:text-primary-blue transition-colors font-medium">أعمالنا</a>
+                <a href="#testimonials" class="text-gray-600 hover:text-primary-blue transition-colors font-medium">آراء العملاء</a>
+                <a href="#stats" class="text-gray-600 hover:text-primary-blue transition-colors font-medium">إحصائيات</a>
+                <a href="#contact" class="bg-primary-blue text-white px-4 py-2 rounded-xl hover:bg-blue-800 transition-colors">تواصل معنا</a>
+            </nav>
+
+            <!-- Mobile Menu Button - زر قائمة الجوال -->
+            <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-primary-blue focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu - قائمة الجوال المخفية -->
+        <nav id="mobile-menu" class="hidden md:hidden bg-gray-100 p-4">
+            <a href="#hero" class="block py-2 px-4 text-gray-600 hover:bg-gray-200 rounded-lg">الرئيسية</a>
+            <a href="#about" class="block py-2 px-4 text-gray-600 hover:bg-gray-200 rounded-lg">من نحن</a>
+            <a href="#story" class="block py-2 px-4 text-gray-600 hover:bg-gray-200 rounded-lg">قصتنا</a>
+            <a href="#services" class="block py-2 px-4 text-gray-600 hover:bg-gray-200 rounded-lg">خدماتنا</a>
+            <a href="#portfolio" class="block py-2 px-4 text-gray-600 hover:bg-gray-200 rounded-lg">أعمالنا</a>
+            <a href="#testimonials" class="block py-2 px-4 text-gray-600 hover:bg-gray-200 rounded-lg">آراء العملاء</a>
+            <a href="#stats" class="block py-2 px-4 text-gray-600 hover:bg-gray-200 rounded-lg">إحصائيات</a>
+            <a href="#contact" class="block py-2 px-4 text-white bg-primary-blue rounded-lg mt-2 text-center">تواصل معنا</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section - قسم المقدمة -->
+        <section id="hero" class="bg-primary-blue text-white py-20 md:py-32 text-center">
+            <div class="container mx-auto px-6">
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-4 animate-pulse">
+                    🥇 Nidzid Agency | وكالة نيدزيد للتسويق بالمؤثرين 📈
+                </h1>
+                <p class="text-lg md:text-xl max-w-2xl mx-auto mb-8 font-light fade-in">
+                    وكالة التسويق بالمؤثرين الحلال الأولى في الخليج.
+                </p>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto mb-10 fade-in">
+                    نربطك مباشرةً بأكبر البراندات والماركات العالمية لعقد صفقات إعلانية حقيقية وزيادة أرباحك الحلال.🚀
+                </p>
+                <a href="#services" class="bg-secondary-red text-white font-bold px-8 py-4 rounded-full text-lg hover:bg-red-700 transition transform hover:scale-105 shadow-lg fade-in">
+                    اكتشف خدماتنا
+                </a>
+            </div>
+        </section>
+
+        <!-- About Us Section - قسم من نحن -->
+        <section id="about" class="py-20 bg-gray-100">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl font-bold mb-4 text-primary-blue fade-in">من نحن</h2>
+                <p class="text-lg max-w-3xl mx-auto text-gray-600 mb-8 fade-in">
+                    وكالة متخصصة تربط العلامات التجارية الموثوقة بأفضل المؤثرين المتوافقين مع القيم الإسلامية.
+                </p>
+                <div class="flex flex-col md:flex-row items-center gap-8 max-w-4xl mx-auto fade-in">
+                    <div class="md:w-1/2">
+                        <img src="https://placehold.co/600x400/1A3C8B/FFFFFF?text=Nidzid+Agency" alt="About Nidzid Agency" class="rounded-3xl shadow-lg w-full">
+                    </div>
+                    <div class="md:w-1/2 text-right">
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            نحن نؤمن بأن التسويق بالمؤثرين يجب أن يكون مبنيًا على قيم ومبادئ راسخة. لذلك، نقدم حلولًا تسويقية تضمن وصول علامتك التجارية إلى جمهور واعٍ وملتزم، من خلال مؤثرين يشاركون نفس القيم.
+                        </p>
+                        <p class="text-gray-700 leading-relaxed">
+                            نحن نستخدم أحدث التقنيات لتحسين أداء الحملات📊 وتقديم تحليلات دقيقة، لضمان تحقيق أفضل النتائج لعملائنا.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Story Section - قسم قصتنا -->
+        <section id="story" class="py-20 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl font-bold mb-4 text-primary-blue fade-in">قصتنا</h2>
+                <div class="max-w-4xl mx-auto text-right">
+                    <p class="text-lg text-gray-700 leading-relaxed fade-in">
+                        تأسست وكالة NidZid على يد نضال زيدي بهدف سد الفجوة بين المؤثرين الموهوبين والعلامات التجارية الطموحة. نؤمن بأن الشغف وحده لا يكفي، بل يجب أن يقترن باستراتيجية قوية وإدارة احترافية لتحقيق النجاح المستدام. نحن شركاؤك في الرحلة، نقدم الدعم والخبرة لتحقيق أهدافك.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section with Swiper.js Slider - قسم الخدمات -->
+        <section id="services" class="py-20 bg-gray-100">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl font-bold mb-4 text-primary-blue fade-in">خدماتنا</h2>
+                <p class="text-lg mb-12 max-w-2xl mx-auto text-gray-600 fade-in">
+                    نقدم مجموعة شاملة من خدمات التسويق بالمؤثرين التي تلبي احتياجاتك.
+                </p>
+
+                <!-- Swiper -->
+                <div class="swiper services-slider max-w-5xl mx-auto fade-in">
+                    <div class="swiper-wrapper">
+                        <!-- Slide 1 -->
+                        <div class="swiper-slide p-6 bg-white rounded-2xl shadow-lg transition transform hover:scale-105">
+                            <i class="fas fa-user-friends text-5xl text-secondary-red mb-4"></i>
+                            <h3 class="text-2xl font-bold mb-2">تسويق بالمؤثرين</h3>
+                            <p class="text-gray-600">
+                                إدارة حملات تسويقية فعالة عبر منصات مثل Instagram, TikTok, و YouTube.
+                            </p>
+                        </div>
+                        <!-- Slide 2 -->
+                        <div class="swiper-slide p-6 bg-white rounded-2xl shadow-lg transition transform hover:scale-105">
+                            <i class="fas fa-cogs text-5xl text-primary-blue mb-4"></i>
+                            <h3 class="text-2xl font-bold mb-2">إدارة حملات شاملة</h3>
+                            <p class="text-gray-600">
+                                نعتني بجميع جوانب الحملة، من التخطيط إلى التنفيذ والمتابعة.
+                            </p>
+                        </div>
+                        <!-- Slide 3 -->
+                        <div class="swiper-slide p-6 bg-white rounded-2xl shadow-lg transition transform hover:scale-105">
+                            <i class="fas fa-chart-line text-5xl text-accent-yellow mb-4"></i>
+                            <h3 class="text-2xl font-bold mb-2">تحليلات وتقارير مفصلة</h3>
+                            <p class="text-gray-600">
+                                نقدم تحليلات دقيقة وتقارير مفصلة لقياس أداء الحملة وتحسينها.
+                            </p>
+                        </div>
+                        <!-- Slide 4 -->
+                        <div class="swiper-slide p-6 bg-white rounded-2xl shadow-lg transition transform hover:scale-105">
+                            <i class="fas fa-shield-alt text-5xl text-secondary-red mb-4"></i>
+                            <h3 class="text-2xl font-bold mb-2">ضمان الجودة والالتزام</h3>
+                            <p class="text-gray-600">
+                                نضمن أن جميع الحملات تتوافق مع القيم الإسلامية ومعايير الجودة العالية.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination mt-8"></div>
+                    <!-- Add Navigation -->
+                    <div class="swiper-button-next text-primary-blue"></div>
+                    <div class="swiper-button-prev text-primary-blue"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio/Campaigns Section - قسم أعمالنا -->
+        <section id="portfolio" class="py-20 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl font-bold mb-4 text-primary-blue fade-in">أعمالنا المميزة</h2>
+                <p class="text-lg max-w-2xl mx-auto mb-12 text-gray-600 fade-in">
+                    نقدم لك لمحة عن النتائج المذهلة التي حققناها لعملائنا.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Tech Campaign Chart -->
+                    <div class="bg-gray-100 p-6 rounded-2xl shadow-lg fade-in">
+                        <h3 class="text-2xl font-bold mb-4 text-primary-blue">حملة تقنية</h3>
+                        <p class="text-gray-600 mb-4">
+                            تحليل نتائج حملة تسويقية لمنتج تقني جديد.
+                        </p>
+                        <div class="chart-container">
+                            <canvas id="techCampaignChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Fashion Campaign Chart -->
+                    <div class="bg-gray-100 p-6 rounded-2xl shadow-lg fade-in">
+                        <h3 class="text-2xl font-bold mb-4 text-primary-blue">حملة أزياء عصرية</h3>
+                        <p class="text-gray-600 mb-4">
+                            توزيع الجمهور المستهدف لحملة أزياء في منطقة الخليج.
+                        </p>
+                        <div class="chart-container">
+                            <canvas id="fashionCampaignChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section with Swiper.js Slider - قسم آراء العملاء -->
+        <section id="testimonials" class="py-20 bg-gray-100">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl font-bold mb-4 text-primary-blue fade-in">آراء عملاؤنا</h2>
+                <p class="text-lg mb-12 max-w-2xl mx-auto text-gray-600 fade-in">
+                    شهادات حقيقية من عملائنا حول تجربتهم معنا.
+                </p>
+                
+                <!-- Swiper for Testimonials -->
+                <div class="swiper testimonials-slider max-w-4xl mx-auto fade-in">
+                    <div class="swiper-wrapper">
+                        <!-- Testimonial 1 -->
+                        <div class="swiper-slide p-8 bg-white rounded-2xl shadow-lg transform transition-transform hover:scale-105 flex flex-col items-center">
+                            <img src="https://placehold.co/100x100/E20613/FFFFFF?text=J.S" alt="Customer Photo" class="w-20 h-20 rounded-full mb-4 object-cover">
+                            <p class="text-gray-700 text-lg italic mb-4">
+                                "Nidzid Agency كانت شريكنا المثالي. فريقهم الاحترافي ساعدنا على الوصول لجمهور جديد تمامًا بفضل حملتهم التسويقية المبتكرة. النتائج كانت تفوق توقعاتنا!"
+                            </p>
+                            <p class="font-bold text-primary-blue">- جواد الشمري، مدير تسويق</p>
+                            <p class="text-sm text-gray-500">شركة تقنية رائدة</p>
+                        </div>
+                        <!-- Testimonial 2 -->
+                        <div class="swiper-slide p-8 bg-white rounded-2xl shadow-lg transform transition-transform hover:scale-105 flex flex-col items-center">
+                            <img src="https://placehold.co/100x100/1A3C8B/FFFFFF?text=F.A" alt="Customer Photo" class="w-20 h-20 rounded-full mb-4 object-cover">
+                            <p class="text-gray-700 text-lg italic mb-4">
+                                "التعاون مع وكالة نيدزيد كان تجربة سلسة ومثمرة. لقد فهموا تمامًا هوية علامتنا التجارية وقيمنا، واختاروا لنا المؤثرين الذين يمثلوننا بأفضل طريقة. خدمة عملاء ممتازة!"
+                            </p>
+                            <p class="font-bold text-primary-blue">- فاطمة أحمد، مؤسسة</p>
+                            <p class="text-sm text-gray-500">علامة تجارية للأزياء</p>
+                        </div>
+                        <!-- Testimonial 3 -->
+                        <div class="swiper-slide p-8 bg-white rounded-2xl shadow-lg transform transition-transform hover:scale-105 flex flex-col items-center">
+                            <img src="https://placehold.co/100x100/FFC900/1A3C8B?text=A.K" alt="Customer Photo" class="w-20 h-20 rounded-full mb-4 object-cover">
+                            <p class="text-gray-700 text-lg italic mb-4">
+                                "ما يميز Nidzid Agency هو التزامهم بالقيم ومصداقيتهم. لقد ساعدونا في بناء حملة تسويقية ناجحة وحلال، مما أكسبنا ثقة عملائنا بشكل أكبر. نوصي بهم بشدة."
+                            </p>
+                            <p class="font-bold text-primary-blue">- عبد الرحمن خالد، رائد أعمال</p>
+                            <p class="text-sm text-gray-500">منصة تعليمية</p>
+                        </div>
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination mt-8"></div>
+                    <!-- Add Navigation -->
+                    <div class="swiper-button-next text-primary-blue"></div>
+                    <div class="swiper-button-prev text-primary-blue"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section - قسم الإحصائيات -->
+        <section id="stats" class="py-20 bg-primary-blue text-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl font-bold mb-4 fade-in">لماذا نحن؟ أرقام تتحدث</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto mt-12">
+                    <!-- Stat 1 -->
+                    <div class="p-6 bg-white rounded-xl shadow-lg text-primary-blue transform transition-transform hover:scale-105 fade-in">
+                        <i class="fas fa-users text-4xl mb-4 text-accent-yellow"></i>
+                        <div class="text-5xl font-extrabold mb-2 stat-counter" data-target="5000000">0</div>
+                        <p class="text-lg font-medium">متابع تم الوصول إليه</p>
+                    </div>
+                    <!-- Stat 2 -->
+                    <div class="p-6 bg-white rounded-xl shadow-lg text-primary-blue transform transition-transform hover:scale-105 fade-in">
+                        <i class="fas fa-handshake text-4xl mb-4 text-secondary-red"></i>
+                        <div class="text-5xl font-extrabold mb-2 stat-counter" data-target="95">0</div>
+                        <p class="text-lg font-medium">نسبة رضا العملاء</p>
+                    </div>
+                    <!-- Stat 3 -->
+                    <div class="p-6 bg-white rounded-xl shadow-lg text-primary-blue transform transition-transform hover:scale-105 fade-in">
+                        <i class="fas fa-bullseye text-4xl mb-4 text-accent-yellow"></i>
+                        <div class="text-5xl font-extrabold mb-2 stat-counter" data-target="1000">0</div>
+                        <p class="text-lg font-medium">حملة ناجحة</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section - قسم التواصل -->
+        <section id="contact" class="py-20 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl font-bold mb-4 text-primary-blue fade-in">هل أنت مستعد للتعاون؟</h2>
+                <p class="text-lg mb-8 max-w-xl mx-auto text-gray-600 fade-in">
+                    سواء كنت مؤثرًا تبحث عن فرص حقيقية، أو علامة تجارية تسعى للوصول إلى الجمهور المناسب، فنحن هنا لمساعدتك.
+                </p>
+                <div class="flex flex-col md:flex-row justify-center items-center gap-4 fade-in">
+                    <a href="mailto:zidinidhal7@gmail.com" class="bg-secondary-red text-white font-bold px-8 py-4 rounded-xl w-full md:w-auto hover:bg-red-700 transition transform hover:scale-105 shadow-lg">
+                        <i class="fas fa-envelope ml-2"></i> راسلنا عبر البريد الإلكتروني
+                    </a>
+                    <a href="https://wa.me/971524505803" target="_blank" class="bg-accent-yellow text-primary-blue font-bold px-8 py-4 rounded-xl w-full md:w-auto hover:bg-yellow-400 transition transform hover:scale-105 shadow-lg">
+                        <i class="fab fa-whatsapp ml-2"></i> تواصل عبر واتساب
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer - تذييل الصفحة -->
+    <footer class="bg-gray-200 py-8">
+        <div class="container mx-auto px-6 text-center text-gray-600">
+            <!-- أيقونات وسائل التواصل الاجتماعي -->
+            <div class="flex justify-center space-x-6 space-x-reverse mb-4">
+                <a href="https://www.instagram.com/nidzid_agency/" target="_blank" class="text-gray-500 hover:text-secondary-red transition-colors text-2xl" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/NidZidAgency/" target="_blank" class="text-gray-500 hover:text-primary-blue transition-colors text-2xl" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/nidhal-zidi/" target="_blank" class="text-gray-500 hover:text-primary-blue transition-colors text-2xl" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+            <!-- نص حقوق النشر -->
+            <p>&copy; 2025 Nidzid Agency. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <!-- Swiper.js CDN -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // كود JavaScript لتأثير التلاشي عند التمرير
+            const fadeInElements = document.querySelectorAll('.fade-in');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.2
+            };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            fadeInElements.forEach(element => {
+                observer.observe(element);
+            });
+
+            // كود تهيئة Swiper.js لسلايدر الخدمات
+            const servicesSwiper = new Swiper('.services-slider', {
+                loop: true,
+                spaceBetween: 30,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                breakpoints: {
+                    640: { slidesPerView: 1, spaceBetween: 20 },
+                    768: { slidesPerView: 2, spaceBetween: 30 },
+                    1024: { slidesPerView: 3, spaceBetween: 40 }
+                }
+            });
+
+            // كود تهيئة Swiper.js لسلايدر آراء العملاء
+            const testimonialsSwiper = new Swiper('.testimonials-slider', {
+                loop: true,
+                spaceBetween: 30,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                breakpoints: {
+                    640: { slidesPerView: 1, spaceBetween: 20 },
+                    768: { slidesPerView: 2, spaceBetween: 30 },
+                    1024: { slidesPerView: 2, spaceBetween: 40 }
+                }
+            });
+
+            // كود عدادات الأرقام المتحركة
+            const animateCounter = (el, end, duration) => {
+                let start = 0;
+                const target = parseInt(end, 10);
+                const stepTime = 20; // ms
+                const increment = (target - start) / (duration / stepTime);
+                let current = start;
+
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        clearInterval(timer);
+                        el.textContent = target.toLocaleString();
+                        if (el.dataset.target === '5000000') el.textContent += '+';
+                        if (el.dataset.target === '95') el.textContent += '%';
+                    } else {
+                        el.textContent = Math.ceil(current).toLocaleString();
+                    }
+                }, stepTime);
+            };
+
+            const counterObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const el = entry.target;
+                        const target = el.getAttribute('data-target');
+                        animateCounter(el, target, 2000);
+                        observer.unobserve(el);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            document.querySelectorAll('.stat-counter').forEach(counter => {
+                counterObserver.observe(counter);
+            });
+            
+            // كود Chart.js للرسم البياني للحملة التقنية
+            const techCtx = document.getElementById('techCampaignChart').getContext('2d');
+            new Chart(techCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['زيادة الوعي', 'زيادة المبيعات'],
+                    datasets: [{
+                        label: 'نسبة الزيادة',
+                        data: [150, 40],
+                        backgroundColor: ['rgba(26, 60, 139, 0.9)', 'rgba(255, 201, 0, 0.9)'],
+                        borderColor: ['rgba(26, 60, 139, 1)', 'rgba(255, 201, 0, 1)'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'النسبة المئوية (%)', font: { family: 'Tajawal', size: 14 } },
+                            ticks: { font: { family: 'Tajawal' } }
+                        },
+                        x: { ticks: { font: { family: 'Tajawal', size: 14 } } }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            titleFont: { family: 'Tajawal' },
+                            bodyFont: { family: 'Tajawal' },
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.parsed.y}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // كود Chart.js للرسم البياني للحملة العصرية
+            const fashionCtx = document.getElementById('fashionCampaignChart').getContext('2d');
+            new Chart(fashionCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['السعودية', 'الإمارات', 'الكويت', 'قطر', 'باقي الدول'],
+                    datasets: [{
+                        label: 'توزيع الجمهور',
+                        data: [45, 25, 15, 10, 5],
+                        backgroundColor: ['#E20613', '#1A3C8B', '#FFC900', '#B0C4DE', '#D3D3D3'],
+                        borderColor: '#FFFFFF',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { font: { family: 'Tajawal' } }
+                        },
+                        tooltip: {
+                            titleFont: { family: 'Tajawal' },
+                            bodyFont: { family: 'Tajawal' },
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.parsed}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // كود لإظهار وإخفاء قائمة الجوال
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
